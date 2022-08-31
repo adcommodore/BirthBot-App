@@ -1,0 +1,13 @@
+.admin_bg {
+    background-image: url("../assets/formbackground.png");
+    height: 92vh;
+    background-position: -6rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+.admin-message-icon {
+    margin-left: 1rem;
+    
+}

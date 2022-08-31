@@ -1,0 +1,8 @@
+.setup_bg {
+    background-image: url("../assets/setup.png");
+    height: 92vh;
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
