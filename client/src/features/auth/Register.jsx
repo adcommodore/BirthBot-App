@@ -66,6 +66,7 @@ const Register = () => {
                         type="text"
                         className="form-control"
                         name="firstName"
+                        ref={adminRef}
                         placeholder="Enter First Name" 
                         value={firstName} 
                         onChange={onChange}

@@ -5,7 +5,7 @@ const baseQuery = fetchBaseQuery({
     baseUrl: 'http://localhost:5001',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.token
+        const token = getState()?.auth?.token
         if (token) {
             headers.set('authorization', `Bearer ${token}`)
         }
@@ -40,6 +40,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: baseQueryWithReauth,
-    tagTypes: ['Admin', 'User', 'Content', 'Messages'],
+    tagTypes: ['Admin', 'User', 'Content', 'Message'],
     endpoints: builder => ({})
 })

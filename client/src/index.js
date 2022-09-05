@@ -11,7 +11,7 @@ import { extendedApiSlice } from './features/messages/msgSlice';
 import { userApiSlice } from './features/users/userSlice';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-store.dispatch(extendedApiSlice.endpoints.getMesssages.initiate());
+// store.dispatch(extendedApiSlice.endpoints.getMesssages.initiate());
 store.dispatch(userApiSlice.endpoints.getUsers.initiate());
 
 ReactDOM.createRoot(document.getElementById('root'))

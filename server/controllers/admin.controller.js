@@ -16,7 +16,7 @@ module.exports = {
             email, 
             phoneNumber,
             password, 
-        } = req.body;
+        } = req.body.formData;
         if (!firstName || 
             !lastName ||
             !email ||

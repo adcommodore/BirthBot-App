@@ -9,14 +9,16 @@ export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
 
         getUsers: builder.query({
-            query: () => '/users',
+            query: () => '/user',
             transformResponse: responseData => {
                 return usersAdapter.setAll(initialState, responseData)
             },
-            providesTags: (result, error, arg) => [
-                { type: 'User', id: "LIST" },
-                ...result.id.map(id => ({ type: 'User', id }))
+            providesTags: (result) => result ?
+            [
+                ...result.map(({ id }) => ({ type: 'User', id })),
+                { type: 'User', id: 'LIST' },
             ]
+            : [{ type: 'User', id: 'LIST' }]
         }),
 
         createUser: builder.mutation({
