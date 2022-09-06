@@ -1,5 +1,4 @@
 const allowedOrigins = [
-    'https://www.birthbot.ai',
     'http://localhost:3000'
 ];
 

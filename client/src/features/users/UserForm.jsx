@@ -15,6 +15,7 @@ const UserForm = () => {
     };
 
     const [ user, setUser ] = useState(initialUserState);
+    const [ error, setError ] = useState('')
     const navigate = useNavigate();
     const [createUser] = useCreateUserMutation();
 
@@ -38,10 +39,16 @@ const UserForm = () => {
                 timeZone,
                 dailySchedule
             })
-                .unwrap()
-                .then((res) => {
-                    setUser('')
-                    navigate(`/checkyourphone/${res._id}`);
+                .then(({data, error}) => {
+                    console.log({data, error})
+                    if (!error) {
+                        console.log(data)
+                        setUser(data)
+                        navigate(`/checkyourphone/${data._id}`)
+                    }
+                    else {
+                        setError(error.data.message)
+                    }
                 })
                 .catch(e => {
                     console.log(e)
@@ -50,6 +57,11 @@ const UserForm = () => {
 
     return (
         <form onSubmit={signupHandler}>
+            { (error !== "") &&
+                <div>
+                    {error}
+                </div>
+            }
             <div>
                 <div className='form-group'>
                     <label htmlFor='firstName' className="form-label">Please enter your first name:</label>

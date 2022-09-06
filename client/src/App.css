@@ -1,35 +1,4 @@
-* {
-  margin: 0 auto important!;
-  padding: 0 auto important!;
-  font-family: "Sofia Pro Medium" important!;
-}
-
-#background {
-  background-image: url("./assets/chatbotmockup.png");
-  background-size: cover;
-  height: 100vh;
-  object-fit: cover;
-  position: absolute;
-}
-
-#landing-page-video {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: -1;
-}
-
-video {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-}
-
+@charset "UTF-8";
 .align-baseline {
   vertical-align: baseline !important;
 }
@@ -6201,10 +6170,9 @@ textarea.form-control-lg {
   background-size: contain;
   border: 1px solid rgba(0, 0, 0, 0.25);
   -webkit-appearance: none;
-      -moz-appearance: none;
+     -moz-appearance: none;
           appearance: none;
   -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
           print-color-adjust: exact;
 }
 .form-check-input[type=checkbox] {

@@ -2,6 +2,10 @@ const User = require('../models/user.model');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
+const normalizedTwilio = (twilioError) => ({
+    message: twilioError.message, err: true
+})
+
 
 module.exports = {
 
@@ -10,17 +14,31 @@ module.exports = {
     // @access Public
 
     createUser: (req, res) => {
-        User.create(req.body)
+        const newUser = req.body.user;
+        client.validationRequests
+            .create({friendlyName: newUser.firstName + " " + newUser.lastName, phoneNumber: newUser.phoneNumber})
+            .then((validationRequests) => {
+                console.log(validationRequests)
+            })
+            .then(() => {
+                console.log('creating a user')
+                return User.create(newUser)
+            })
             .then((newUser) => {
-                console.log({ 'success': `New user ${firstName} created!` })
-                res.status(201).json({ 'success': `New user ${firstName} created!` });
-                client.validationRequests
-                    .create({friendlyName: newUser.firstName + newUser.lastName, phoneNumber: newUser.phoneNumber})
-                    .then(validation_request => console.log(validation_request))
+                console.log(newUser)
+                res.status(201).json(newUser);
             })
             .catch((err) => {
+                console.log("we got here")
+                let msg = '';
+                // if (res.status(400).json(normalizedTwilio(twilioError)))
+                if (err.code == 11000) {
+                    msg = "Phone number already registered."
+                } else {
+                    msg = err.message
+                }
                 console.log('Something went wrong when trying to create a new user');
-                res.status(400).json(err);
+                res.status(400).json({message: msg, err: err});
             })
     },
 

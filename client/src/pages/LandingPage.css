@@ -1,0 +1,25 @@
+.color-block {
+    background-color: #EDDED7;
+    border-radius: 20%;
+    height: 20rem;
+    width: 20rem;
+    margin-left: 15rem;
+    margin-right: 5rem;
+}
+.title {
+    margin: 2rem;
+    text-align: center;
+}
+
+.sub-container {
+    display: flex;
+}
+
+.info-text {
+    align-self: center;
+    margin-left: 2rem;  
+}
+
+#button {
+    margin-left: 2rem;
+}
