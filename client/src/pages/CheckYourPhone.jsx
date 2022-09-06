@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../features/users/userSlice';
 
 function CheckYourPhone() {
-    const { id } = useParams();
-    
+    const user = useSelector(selectCurrentUser)
+
     return (
     <>
-        <h4> have successfully sign up for BirthBot.</h4>
+        <h4> {user.firstName} have successfully sign up for BirthBot.</h4>
         <h3>Check your phone to see if BirthBot sent you a text!</h3>
     </>
     )

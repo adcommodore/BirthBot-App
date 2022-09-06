@@ -5,6 +5,7 @@ const client = require('twilio')(accountSid, authToken);
 const normalizedTwilio = (twilioError) => ({
     message: twilioError.message, err: true
 })
+const{ sendMessage }= require('../functions/outbound');
 
 
 module.exports = {
@@ -23,6 +24,10 @@ module.exports = {
             .then(() => {
                 console.log('creating a user')
                 return User.create(newUser)
+            })
+            .then((newUser) => {
+                sendMessage(`${newUser.firstName}, thanks for signing up for BirthBot!`, newUser.phoneNumber)
+                return newUser
             })
             .then((newUser) => {
                 console.log(newUser)

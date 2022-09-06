@@ -1,6 +1,8 @@
-import { useCreateUserMutation } from "./userSlice";
+import { useCreateUserMutation } from "./userApiSlice";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "./userSlice";
 
 const UserForm = () => {
     const initialUserState = {
@@ -18,6 +20,7 @@ const UserForm = () => {
     const [ error, setError ] = useState('')
     const navigate = useNavigate();
     const [createUser] = useCreateUserMutation();
+    const dispatch = useDispatch();
 
     const signupHandler = (e) => {
         e.preventDefault();
@@ -43,8 +46,8 @@ const UserForm = () => {
                     console.log({data, error})
                     if (!error) {
                         console.log(data)
-                        setUser(data)
-                        navigate(`/checkyourphone/${data._id}`)
+                        dispatch(setCurrentUser(data))
+                        navigate('/checkyourphone/')
                     }
                     else {
                         setError(error.data.message)

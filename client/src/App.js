@@ -25,7 +25,7 @@ function App() {
             // public routes
             <Route element = { <LandingPage/> } index />
             <Route element = { <UserSignup/> } path="/signup" />
-            <Route element = { <CheckYourPhone/> } path="/checkyourphone/:userId" />
+            <Route element = { <CheckYourPhone/> } path="/checkyourphone/" />
             <Route element = { <AdminHome/> } path="/admin" />
             <Route element = { <AdminRegister/> } path="/admin/register" />
             <Route element = { <ChangePassword/> } path="/admin/resetpassword" />

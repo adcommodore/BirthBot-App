@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectUserById } from "../users/userSlice";
+import { selectUserById } from "../users/userApiSlice";
 import { useParams } from 'react-router-dom';
 import { useGetMessagesByUserIdQuery } from "./msgSlice";
 import Spinner from '../../components/Spinner';

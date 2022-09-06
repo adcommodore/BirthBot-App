@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectAllUsers } from '../users/userSlice';
+import { selectAllUsers } from '../users/userApiSlice';
 import { Link } from 'react-router-dom';
 
 function MessageUser({ userId }) {
