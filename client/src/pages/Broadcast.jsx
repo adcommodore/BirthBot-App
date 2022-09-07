@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentAdmin } from '../features/auth/authSlice';
-import Navigation from '../components/Navigation';
+import AdminNavBar from '../components/AdminNavBar';
 
 function Broadcast() {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ function Broadcast() {
 
     return (
         <>
-            <Navigation />
+            <AdminNavBar />
             <section style={{ textAlign: 'center'}}>
                 <input 
                     placeholder='Write a message...' 

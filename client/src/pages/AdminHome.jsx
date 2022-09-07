@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from '../components/Navigation';
+import AdminNavBar from '../components/AdminNavBar';
 import { Row, Col, Button } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap';
 import './AdminHome.css';
@@ -7,7 +7,7 @@ import './AdminHome.css';
 function Login() {
     return (
     <div>
-        <Navigation />
+        <AdminNavBar />
         <Row>
             <Col md={6} className="admin_bg"></Col>
             <Col md={6} className="d-flex flex-direction-column align-items-center justify-content-center" style={{backgroundColor: '#F5F5F5'}}>

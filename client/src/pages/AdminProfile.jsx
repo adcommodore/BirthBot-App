@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentAdmin } from '../features/auth/authSlice';
-import Navigation from '../components/Navigation';
+import AdminNavBar from '../components/AdminNavBar';
 
 
 function AdminProfile() {
@@ -19,7 +19,7 @@ function AdminProfile() {
 
     return (
         <>
-            <Navigation />
+            <AdminNavBar />
             <div className="container">
                 <header className="jumbotron">
                     <h3>

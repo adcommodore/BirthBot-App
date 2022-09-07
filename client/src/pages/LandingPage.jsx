@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Preloader from '../components/Preloader';
+import LandingPageNavBar from '../components/LandingPageNavBar';
 import './LandingPage.css';
 
 function LandingPage () {
@@ -25,6 +26,7 @@ function LandingPage () {
                 :
         
             <div>
+                <LandingPageNavBar/>
                 <div className='background'>
                     <div className='title'>
                         <h1 className="display-3">BirthBot</h1>
@@ -36,7 +38,7 @@ function LandingPage () {
                         <div className='color-block'>
                         </div>
                     </div>
-                    <Link id="button" className="btn btn-primary" to="/signup">Let's Get Started</Link>
+                    <Link id="button" className="btn btn-primary" to="/signup">Get Started!</Link>
                 </div>
             </div>
             }

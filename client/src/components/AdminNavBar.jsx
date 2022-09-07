@@ -2,9 +2,9 @@ import React from 'react';
 import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import logo from '../assets/logo.png';
+import logo from '../assets/img/logo.png';
 
-function Navigation() {
+function AdminNavBar() {
     const dispatch = useDispatch()
     const { admin } = useSelector((state) => state.auth)
 
@@ -54,4 +54,4 @@ function Navigation() {
     )
 }
 
-export default Navigation
+export default AdminNavBar

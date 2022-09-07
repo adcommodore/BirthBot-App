@@ -1,4 +1,5 @@
-import React from 'react';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Layout from './components/Layout';

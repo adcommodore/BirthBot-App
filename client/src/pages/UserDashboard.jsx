@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentAdmin } from '../features/auth/authSlice';
-import Navigation from '../components/Navigation';
+import AdminNavBar from '../components/AdminNavBar';
 
 function UserDashboard() {
   const navigate = useNavigate()
@@ -16,7 +16,7 @@ function UserDashboard() {
   
   return (
     <div>
-        <Navigation />
+        <AdminNavBar />
         UserDashboard
     </div>
   )

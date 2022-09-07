@@ -1,4 +1,4 @@
-import Navigation from '../components/Navigation';
+import AdminNavBar from '../components/AdminNavBar';
 import { Row, Col } from "react-bootstrap";
 import Login from '../features/auth/Login';
 import './AdminLogin.css';
@@ -7,7 +7,7 @@ const AdminLogin = () => {
 
     return (
         <>
-            <Navigation />
+            <AdminNavBar />
             <Row>
                 <Col md={6} className="login_bg">
                 </Col>

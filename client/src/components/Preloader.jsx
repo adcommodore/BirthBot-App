@@ -1,5 +1,5 @@
 import React from 'react';
-import LandingPageVideo from "../assets/LandingPageVideo.mp4";
+import LandingPageVideo from "../assets/img/LandingPageVideo.mp4";
 import './Preloader.css';
 
 function Preloader() {

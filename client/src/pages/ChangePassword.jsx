@@ -1,10 +1,10 @@
 import React from 'react';
-import Navigation from '../components/Navigation';
+import AdminNavBar from '../components/AdminNavBar';
 
 function ChangePassword() {
   return (
     <div>
-        <Navigation/>
+        <AdminNavBar/>
         ChangePassword
     </div>
   )

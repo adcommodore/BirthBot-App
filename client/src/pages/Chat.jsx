@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { selectCurrentAdmin } from '../features/auth/authSlice';
 import { Row, Col, Container } from 'react-bootstrap';
-import Navigation from '../components/Navigation';
+import AdminNavBar from '../components/AdminNavBar';
 import UsersList from '../features/users/UserList';
 import MessageUser from '../features/messages/MessageUser';
 import MessageList from '../features/messages/MessageList';
@@ -13,7 +13,7 @@ function Chat() {
 
   const content = (
     <div>
-      <Navigation />
+      <AdminNavBar />
       <section>
         <h1>{welcome}</h1>
       </section>

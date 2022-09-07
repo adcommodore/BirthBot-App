@@ -1,4 +1,4 @@
-import Navigation from '../components/Navigation';
+import AdminNavBar from '../components/AdminNavBar';
 import { Row, Col } from "react-bootstrap";
 import Register from '../features/auth/Register';
 import './AdminRegister.css';
@@ -7,7 +7,7 @@ function AdminRegister () {
 
   return (
     <>
-        <Navigation />
+        <AdminNavBar />
         <Row>
           <Col 
             md={6} 
