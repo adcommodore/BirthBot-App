@@ -12,25 +12,22 @@ function AdminNavBar() {
     }
 
     return (
-        <div>
-            <Navbar bg="secondary" expand="lg">
-                <Container>
-                    <LinkContainer to="/admin">
-                        <Navbar.Brand>
+        <>
+            <Navbar expand="lg">
+                <Container >
+                        <Navbar.Brand href="/admin">
                             <img src={logo} style={{width: "5rem", height: "5rem"}} alt="BirthX Logo"/>
                         </Navbar.Brand>
-                    </LinkContainer>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
                         {admin ? (
-                            <LinkContainer to="/admin" onClick={onLogout}>
-                                <Nav.Link>Logout</Nav.Link>
-                            </LinkContainer>
+                            <Nav.Link href="/admin" onClick={onLogout}>
+                                Logout
+                            </Nav.Link>
                         ) : (
-                            <LinkContainer to="/admin/login">
-                                <Nav.Link>Login</Nav.Link>
-                            </LinkContainer>
+                            <Nav.Link href="/admin/login">
+                                Login
+                            </Nav.Link>
                         )}
                         <NavDropdown title="Admin Panel" id="basic-nav-dropdown">
                             <LinkContainer to="/admin/users">
@@ -50,7 +47,7 @@ function AdminNavBar() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </div>
+        </>
     )
 }
 

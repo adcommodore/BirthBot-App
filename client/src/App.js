@@ -1,5 +1,4 @@
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Layout from './components/Layout';
@@ -21,7 +20,7 @@ function App() {
   return (
     <>
         <Routes>
-          <Route element={<Layout/>} path="/">
+          <Route element = { <Layout/> } path="/">
 
             // public routes
             <Route element = { <LandingPage/> } index />

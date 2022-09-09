@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Preloader from '../components/Preloader';
 import LandingPageNavBar from '../components/LandingPageNavBar';
 import './LandingPage.css';
@@ -38,7 +38,7 @@ function LandingPage () {
                         <div className='color-block'>
                         </div>
                     </div>
-                    <Link id="button" className="btn btn-primary" to="/signup">Get Started!</Link>
+                    <Button variant='primary'>Get Started!</Button>
                 </div>
             </div>
             }

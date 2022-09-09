@@ -22,7 +22,7 @@ function TextAnimation({ text }) {
 
     return (
         <Container>
-            <h1>{ currentText }</h1>
+            <h2 className='congrats-card'>{ currentText }</h2>
         </Container>
         
     )

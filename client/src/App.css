@@ -45,7 +45,7 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   position: relative;
-  background-color:  #fff !important;
+  background-color:  #DBD0DD !important;
   color: #4C455F !important;
   font-family: 'Sofia Pro Light' !important;
 }
@@ -135,33 +135,19 @@ p.danger {
 /************ NavBar ************/
 nav.navbar {
   padding: 0px;
-  background-color: #EDDED7 !important;
-  
-  width: 100%;
+  background-color: white !important;
+  border: #fff;
   top: 0;
   z-index: 9999;
   transition:  0.32s ease-in-out;
 }
 
-nav.navbar.scrolled {
-  padding: 0px 0;
-  background-color: #fff;
+/************ CheckYourPhone ************/
+.congrats-card {
+  color: whitesmoke;
+  text-shadow: 0 0 3px #4C455F , 0 0 5px #4C455F
 }
 
-nav.navbar a.navbar-brand {
-    width: 9%;
-}
-
-nav.navbar .navbar-nav .nav-link.navbar-link {
-  font-weight: 800;
-  color: #4C455F !important;
-  letter-spacing: 0.5px;
-  padding: 0 20px;
-  font-size: 1.5vw;
-  opacity: 0.75;
-}
-
-nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
-nav.navbar .navbar-nav a.nav-link.navbar-link.active {
-    opacity: 1;
+.btn .btn-primary {
+  background-color: #4C455F;
 }
