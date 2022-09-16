@@ -4,6 +4,7 @@ import logo from '../assets/img/logo.png';
 function LandingPageNavBar() {
 
     return (
+        <Container style={{padding: "1rem 0rem", }}>
         <Navbar expand="lg">
             <Container>
                 <Navbar.Brand href="/">
@@ -27,6 +28,7 @@ function LandingPageNavBar() {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        </Container>
     )
 }
 

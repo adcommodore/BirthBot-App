@@ -12,7 +12,7 @@ function AdminNavBar() {
     }
 
     return (
-        <>
+        <Container style={{padding: "1rem 0rem", }}>
             <Navbar expand="lg">
                 <Container >
                         <Navbar.Brand href="/admin">
@@ -47,7 +47,7 @@ function AdminNavBar() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </>
+        </Container>
     )
 }
 

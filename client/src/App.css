@@ -134,9 +134,10 @@ p.danger {
 
 /************ NavBar ************/
 nav.navbar {
-  padding: 0px;
+  padding: 0;
+  margin: 0rem -2rem;
   background-color: white !important;
-  border: #fff;
+  border-radius: 10px;
   top: 0;
   z-index: 9999;
   transition:  0.32s ease-in-out;
@@ -150,4 +151,20 @@ nav.navbar {
 
 .btn .btn-primary {
   background-color: #4C455F;
+}
+
+.landing-page-video {
+  object-fit: fill;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  overflow: hidden;
+}
+
+.login_bg {
+  background-image: url('./assets/img/setup.png');
+  height: 92vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
 }

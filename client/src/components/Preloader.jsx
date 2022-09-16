@@ -1,11 +1,10 @@
 import React from 'react';
 import LandingPageVideo from "../assets/img/LandingPageVideo.mp4";
-import './Preloader.css';
 
 function Preloader() {
     
     return (
-        <div id="landing-page-video">
+        <div className="landing-page-video">
             <video src={LandingPageVideo} autoPlay muted/>
         </div>
     )

@@ -6,7 +6,12 @@ const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
+const { logger } = require('./middleware/logEvents');
+const errorHandler = require('./middleware/errorHandler');
 const PORT = process.env.PORT;
+
+// custom middleware logger 
+app.use(logger);
 
 app.use(helmet());
 app.use(credentials);
@@ -14,6 +19,8 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+
+// app.use(express.static(path.join(__dirname, '/public')));
 
 require('./config/mongoose.config');
 require('./config/twilio.config');
@@ -23,6 +30,13 @@ app.use('/content', require('./routes/content.routes'));
 app.use('/hospital', require('./routes/hospital.routes'));
 app.use('/user',  require('./routes/user.routes'));
 app.use('/msg', require('./routes/message.routes'));
+
+// app.all('*', (req, res) => {
+        // res.status(404);
+//     res.json({error: '404 Not Found'})
+// })
+
+app.use(errorHandler);
 
 const server = require('http').createServer(app);
 
