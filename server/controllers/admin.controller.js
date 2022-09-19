@@ -23,29 +23,30 @@ module.exports = {
             !phoneNumber ||
             !password) return res.status(400).json({ 'message': 'All fields are required.' });
     
-        try {
-            //encrypt the password
-            const hashedPassword = await bcrypt.hash(password, 10);
+        //encrypt the password
+        const hashedPassword = await bcrypt.hash(password, 10);
     
-            //create and store the new user
-            const result = await Admin.create({
-                firstName, 
-                lastName, 
-                email, 
-                phoneNumber, 
-                password: hashedPassword,
-            });
-            console.log({ 'success': `New admin ${firstName} created!` })
-            res.status(201).json({ 'success': `New admin ${firstName} created!` });
-        } catch (err) {
-            let msg;
-            if(err.code == 11000) {
-                msg = "Administrator already exists."
-            } else {
-                msg = err.message
-            }
-            res.status(500).json({'message': err.message})
-        }
+        //create and store the new user
+        await Admin.create({
+            firstName, 
+            lastName, 
+            email, 
+            phoneNumber, 
+            password: hashedPassword,
+        })
+            .then((newAdmin) => {
+                console.log(newAdmin)
+                res.json(newAdmin)
+            })
+            .catch((err) => {
+                let msg
+                if (err.code == 11000) {
+                    msg = "Administrator already exists."
+                } else {
+                    msg = err.message
+                }
+                res.status(500).json({'message': err.message})
+            })
     },
 
     // @description login admininstrator
@@ -59,7 +60,7 @@ module.exports = {
         if (!email || !password) return res.status(400).json({ 'message': 'Username and password are required.' });
     
         const foundAdmin = await Admin.findOne({ email }).exec();
-        if (!foundAdmin) return res.sendStatus(401); //Unauthorized 
+        if (!foundAdmin) return res.sendStatus(401).json({ 'message': 'Username or password is incorrect.' });
 
         // evaluate password 
         const match = await bcrypt.compare(password, foundAdmin.password);
@@ -99,14 +100,14 @@ module.exports = {
     
             // saves refreshToken with current user
             foundAdmin.refreshToken = [...newRefreshTokenArray, newRefreshToken];
-            const result = await foundAdmin.save();
+            await foundAdmin.save();
     
             // creates Secure Cookie with refresh token
             res.cookie('jwt', newRefreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
             res.json({ accessToken });
     
         } else {
-            res.sendStatus(401);
+            res.sendStatus(401).json({ 'message': 'Username or password is incorrect.' });
         }
     },
 
@@ -155,11 +156,8 @@ module.exports = {
             runValidators: true,
         })
             .then((updateAdmin) => {
+                console.log(updateAdmin)
                 res.json(updateAdmin);
-            })
-            .catch((err) => {
-                res.json('Something went wrong when updating administrator')
-                res.status(400).json(err);
             })
     },
 
@@ -168,7 +166,6 @@ module.exports = {
     // @access Private
 
     logoutAdmin: async (req, res) => {
-
         // delete the accessToken
         const cookies = req.cookies;
         if (!cookies?.jwt) return res.sendStatus(204); // no content
@@ -183,7 +180,7 @@ module.exports = {
     
         // delete refreshToken in database
         foundAdmin.refreshToken = foundAdmin.refreshToken.filter(rt => rt !== refreshToken);;
-        const result = await foundAdmin.save();
+        await foundAdmin.save();
     
         res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
         res.sendStatus(204);

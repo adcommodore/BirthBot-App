@@ -12,12 +12,7 @@ module.exports = {
                 console.log(newContent);
                 res.json(newContent);
             })
-            .catch((err) => {
-                console.log('Something went wrong when creating new content.');
-                res.status(400).json(err);
-            })
     },
-
 
     // @description find one piece of content
     // @route GET /content/:id
@@ -28,10 +23,6 @@ module.exports = {
             .then((content) => {
                 console.log(content);
                 res.json(content);
-            })
-            .catch((err) => {
-                console.log('Failed to find content.');
-                res.json({ message: 'Failed to find content.', error: err})
             })
     },
 
@@ -45,27 +36,8 @@ module.exports = {
                 console.log(content);
                 res.json(content);
             })
-            .catch((err) => {
-                console.log('Failed to find content.');
-                res.json({ message: 'Failed to find content.', error: err})
-            })
     },
 
-    // @description find by index, sort by gestational day
-    // @route GET /content/
-    // @access Private
-
-    // findByIndex: (req, res) => {
-    //     Content.find().sort('-index')
-    //         .then((content) => {
-    //             console.log(content);
-    //             res.json(content);
-    //         })
-    //         .catch((err) => {
-    //             console.log('Failed to find content.');
-    //             res.json({ message: 'Failed to find content.', error: err})
-    //         })
-    // },
 
     // @description update content
     // @route PUT /content/:id
@@ -83,10 +55,6 @@ module.exports = {
             .then((updatedContent) => {
                 console.log(updatedContent);
                 res.json(updatedContent);
-            })
-            .catch((err) => {
-                console.log('Something went wrong when trying to update Content.');
-                res.status(400).json(err);
             })
     }
 }

@@ -44,7 +44,8 @@ const AdminSchema = new mongoose.Schema({
         minlength: [ 8, "Please create a password with at least 12 characters" ],
         maxlength: 1000
     },
-    refreshToken: [String]
+
+    refreshToken: [String],
 
 }, {timestamps: true, minimize: false});
 

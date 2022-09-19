@@ -8,14 +8,9 @@ const MessageSchema = new mongoose.Schema({
             ref: 'User'
         },
 
-        from: {
+        recievedFromPhoneNumber: {
             type: String,
             required: [ true, "Sender's phone number required."]
-        },
-
-        to: {
-            type: String,
-            required: [ true, "Reciever's phone number required."]
         },
 
         body: {
@@ -23,11 +18,13 @@ const MessageSchema = new mongoose.Schema({
             required: [ true, "Message body required."],
             maxlength: [ 1600, "Please shorten the length of your message"]
         },
+
         date: {
             type: String,
             required: true,
             default: Date.now()
         }
+
 }, { timestamp: true })
 
 const Message = mongoose.model('Message', MessageSchema);

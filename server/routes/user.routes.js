@@ -12,14 +12,14 @@ const verifyJWT = require('../middleware/verifyJWT');
 
     // find all users
 
-    router.get('/', verifyJWT, UserController.findAllUsers);
+    router.get('/', UserController.findAllUsers);
 
     // find all subscribers 
 
-    router.get('/subscribed/', verifyJWT, UserController.findAllSubscribers);
+    router.get('/subscribed/', UserController.findAllSubscribers);
 
     // update user
 
-    router.put('/:id', verifyJWT, UserController.updateUser);
+    router.put('/:id', UserController.updateUser);
 
 module.exports = router

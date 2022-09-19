@@ -13,7 +13,28 @@ const HospitalSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 5,
-        maxlength: 200
+        maxlength: 100
+    },
+
+    city: {
+        type: String,
+        required: true,
+        minlength: 2,
+        maxlength: 50
+    },
+
+    state: {
+        type: String,
+        required: true,
+        minlength: 2,
+        maxlength: 2
+    },
+
+    zipcode: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 5
     },
 
     cSection: Number,

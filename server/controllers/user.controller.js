@@ -2,9 +2,6 @@ const User = require('../models/user.model');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
-const normalizedTwilio = (twilioError) => ({
-    message: twilioError.message, err: true
-})
 const{ sendMessage }= require('../functions/outbound');
 
 
@@ -36,7 +33,6 @@ module.exports = {
             .catch((err) => {
                 console.log("we got here")
                 let msg = '';
-                // if (res.status(400).json(normalizedTwilio(twilioError)))
                 if (err.code == 11000) {
                     msg = "Phone number already registered."
                 } else {
@@ -57,10 +53,6 @@ module.exports = {
                 console.log(oneUser);
                 res.json(oneUser);
             })
-            .catch((err) => { 
-                console.log('Something went wrong when trying to find user.');
-                res.json({ message: 'Something went wrong when trying to find user.', error: err });
-            })
     },
 
     // @description find all users
@@ -73,10 +65,6 @@ module.exports = {
                 console.log(allUsers);
                 res.json(allUsers);
             })
-            .catch((err) => {
-                console.log('Something went when trying to find all the users.');
-                res.json({ message: 'Something went wrong when trying to find all the users.', error: err });
-            })
     },
 
     // @description find all subscribers
@@ -88,10 +76,6 @@ module.exports = {
             .then((allUsers) => {
                 console.log(allUsers);
                 res.json(allUsers);
-            })
-            .catch((err) => {
-                console.log('Something went when trying to find all the subscribers.');
-                res.json({ message: 'Something went wrong when trying to find all the subscribers.', error: err });
             })
     },
 
@@ -117,10 +101,6 @@ module.exports = {
             .then((updatedUser) => {
                 console.log(updatedUser);
                 res.json(updatedUser);
-            })
-            .catch((err) => {
-                console.log('Something went wrong when updated user.');
-                res.status(400).json(err);
             })
     }
 }

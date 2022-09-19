@@ -32,7 +32,6 @@ module.exports = {
                 console.log('Something went wrong when trying to send a text message');
                 res.status(400).json(err);
             })
-            
         
         const result = await sendMessage(body, user.phoneNumber);
         console.log(result.sid);
@@ -55,5 +54,15 @@ module.exports = {
                 res.json({ message: 'Failed to find messages for this user.', error: err})
             })
     },
+
+    inbound: (req, res) => {
+        // find user
+
+        // user not found
+
+        // user found
+
+        // 
+    }
 
 }
