@@ -13,7 +13,7 @@ const SentSMSSchema = new mongoose.Schema({
             ref: 'Content'
         },
 
-        sentToPhoneNumber: {
+        sentTo: {
             type: String,
             required: [ true, "Reciever's phone number required."]
         },

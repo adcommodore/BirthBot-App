@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MessageSchema = new mongoose.Schema({
+const RecievedSMSSchema = new mongoose.Schema({
 
         userId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -8,7 +8,7 @@ const MessageSchema = new mongoose.Schema({
             ref: 'User'
         },
 
-        recievedFromPhoneNumber: {
+        recievedFrom: {
             type: String,
             required: [ true, "Sender's phone number required."]
         },
@@ -27,6 +27,6 @@ const MessageSchema = new mongoose.Schema({
 
 }, { timestamp: true })
 
-const Message = mongoose.model('Message', MessageSchema);
+const RecievedSMS = mongoose.model('RecievedSMS', RecievedSMSSchema);
 
-module.exports = Message
+module.exports = RecievedSMS

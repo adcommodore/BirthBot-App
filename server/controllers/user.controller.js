@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
-const{ sendMessage }= require('../functions/outbound');
+const sendMessage = require('../twilio/outbound');
 
 
 module.exports = {
@@ -48,7 +48,7 @@ module.exports = {
     // @access Private
 
     findOneUser: (req, res) => {
-        User.findOne({_id: req.params.id})
+        User.findOne({ _id: req.params.id })
             .then((oneUser) => {
                 console.log(oneUser);
                 res.json(oneUser);
@@ -72,7 +72,7 @@ module.exports = {
     // @access Private
 
     findAllSubscribers: (req, res) => {
-        User.find({ subscribed: true})
+        User.find({ subscribed: true })
             .then((allUsers) => {
                 console.log(allUsers);
                 res.json(allUsers);
