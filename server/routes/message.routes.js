@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { sendMessage } = require('../twilio/outbound')
+const { sendMessageWithMedia } = require('../twilio/outbound')
 const { recieveMessage } = require('../twilio/inbound');
 const User = require('../models/user.model');
 const SentSMS = require('../models/sent_sms.model');
 
-router.post('/outbound', sendMessage);
+router.post('/outbound', sendMessageWithMedia);
 router.post('/inbound', recieveMessage);
 
 router.get('/findbyuserId', async (req, res) => {

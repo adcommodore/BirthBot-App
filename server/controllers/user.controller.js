@@ -2,8 +2,7 @@ const User = require('../models/user.model');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
-const sendMessage = require('../twilio/outbound');
-
+const { sendMessageWithMedia } = require('../twilio/outbound');
 
 module.exports = {
 
@@ -13,17 +12,18 @@ module.exports = {
 
     createUser: (req, res) => {
         const newUser = req.body.user;
-        client.validationRequests
-            .create({friendlyName: newUser.firstName + " " + newUser.lastName, phoneNumber: newUser.phoneNumber})
-            .then((validationRequests) => {
-                console.log(validationRequests)
-            })
+        client.lookups.v1.phoneNumbers(newUser.phoneNumber)
+            .fetch({countryCode: 'US'})
             .then(() => {
-                console.log('creating a user')
                 return User.create(newUser)
             })
             .then((newUser) => {
-                sendMessage(`${newUser.firstName}, thanks for signing up for BirthBot!`, newUser.phoneNumber)
+                sendMessageWithMedia({
+                    userId: newUser._id,
+                    phoneNumber: newUser.phoneNumber,
+                    body: `Hi ${newUser.firstName}, I'm BirthBot. I'm a special kind of chatbot focused on providing you with easily accessible, evidence-based information on pregnancy, birth, and postpartum. Go ahead and save my contact info so you know its me texting.`,
+                    mediaUrl: ['https://media.giphy.com/media/2A1FfWjPqZdpXYb9Ur/giphy.gif','https://vcard.link/card/DCzP.vcf']
+                })
                 return newUser
             })
             .then((newUser) => {

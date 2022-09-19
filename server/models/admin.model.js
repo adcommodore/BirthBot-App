@@ -29,12 +29,12 @@ const AdminSchema = new mongoose.Schema({
     },
 
     phoneNumber: {
-        type: Number,
-        required: [ true, "You must enter your phone number."],
+        type: String,
+        required: [ true, "A phone number is required to sign up for BirthBot."],
         unique: true, 
         minlength: [ 10, "Please enter a 10 digit phone with no spaces or other characters."],
         maxlength: [ 10, "Please enter a 10 digit phone with no spaces or other characters."],
-        trim: true,
+        set: number => '+1' + number.toString()
     },
 
     password: {

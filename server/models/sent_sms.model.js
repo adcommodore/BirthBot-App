@@ -24,6 +24,8 @@ const SentSMSSchema = new mongoose.Schema({
             maxlength: [ 1600, "Please shorten the length of your message"]
         },
 
+        mediaUrl: [String],
+
         date: {
             type: String,
             required: true,
