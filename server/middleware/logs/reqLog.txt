@@ -86,3 +86,5 @@
 20220919	19:08:43	69058a7e-a49f-495b-b4ed-975b702aacbe	POST	http://localhost:3000	/user
 20220919	19:13:07	bdf5a0d0-49fc-4d8a-8a75-cde084401fd0	OPTIONS	http://localhost:3000	/user
 20220919	19:13:07	61c1f50d-b7a5-4fde-a63d-8bb1bc5e68ff	POST	http://localhost:3000	/user
+20220921	19:31:44	f1ddf263-2fdc-49a9-99ae-3a58cc5c4ce3	OPTIONS	http://localhost:3000	/admin/register
+20220921	19:31:44	dcc59815-d7f7-4155-8c5a-83af11473da2	POST	http://localhost:3000	/admin/register

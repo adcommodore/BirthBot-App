@@ -12,8 +12,8 @@ function AdminNavBar() {
     }
 
     return (
-        <Container style={{padding: "1rem 0rem", }}>
-            <Navbar expand="lg">
+        <Container>
+            <Navbar expand="lg" className='adminNavBar'>
                 <Container >
                         <Navbar.Brand href="/admin">
                             <img src={logo} style={{width: "5rem", height: "5rem"}} alt="BirthX Logo"/>

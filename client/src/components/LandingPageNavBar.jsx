@@ -5,7 +5,7 @@ function LandingPageNavBar() {
 
     return (
         <Container style={{padding: "1rem 0rem", }}>
-        <Navbar expand="lg">
+        <Navbar expand="lg" className='userNavBar'>
             <Container>
                 <Navbar.Brand href="/">
                     <img src={logo} style={{width: "5rem", height: "5rem"}} alt="BirthX Logo"/>
