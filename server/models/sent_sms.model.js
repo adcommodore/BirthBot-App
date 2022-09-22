@@ -13,6 +13,18 @@ const SentSMSSchema = new mongoose.Schema({
             ref: 'Content'
         },
 
+        contentDeliveryIndex: {
+            type: Number,
+            min: 0,
+            max: 6,
+        },
+
+        contentGestationWeek: {
+            type: Number,
+            min: 4,
+            max: 42,
+        },
+
         sentTo: {
             type: String,
             required: [ true, "Reciever's phone number required."]

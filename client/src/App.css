@@ -45,7 +45,6 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   position: relative;
-  background-color:  #DBD0DD !important;
   color: #4C455F !important;
   font-family: 'Sofia Pro Light' !important;
 }
@@ -132,15 +131,19 @@ p.danger {
   color: red;
 }
 
-/************ NavBar ************/
-nav.navbar {
+/************ Admin NavBar ************/
+.adminNavBar {
   padding: 0;
-  margin: 0rem -2rem;
-  background-color: white !important;
+  background-color: #DBD0DD !important;
+
+  
+}
+
+/************ User NavBar ************/
+.userNavBar {
+  padding: 0;
+  background-color: #DBD0DD !important;
   border-radius: 10px;
-  top: 0;
-  z-index: 9999;
-  transition:  0.32s ease-in-out;
 }
 
 /************ AdminLogin ************/
@@ -151,7 +154,6 @@ nav.navbar {
   width: 100;
   mix-blend-mode: normal;
   min-height: 100vh;
-  position: 
 }
 
 /************ CheckYourPhone ************/

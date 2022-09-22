@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const differenceInDays = require('date-fns/differenceInDays')
 
 const UserSchema = new mongoose.Schema({
 
@@ -19,9 +20,7 @@ const UserSchema = new mongoose.Schema({
     estimatedDueDate: {
         type: Date,
         required: [ true, "Your last menstrual period is required to calculate your estimated due date."],
-        // min: 
-        max: Date.now ,
-        // set: add(Date.now(), { weeks: 41 }).toISOString()
+        max: Date.now
     },
 
     phoneNumber: {
@@ -105,13 +104,32 @@ const UserSchema = new mongoose.Schema({
         ],
     },
 
+    UTCSchedule: {
+        type: String,
+        required: true,
+    }
+
     subscribed: {
         type: Boolean,
         default: true,
     },
     
-}, {timestamps: true, minimize: false});
+},
+{
+    virtuals: {
+        gestationWeek: {
+            type: Number,
+            get () {
+            // current date - gestation start date = number of days / 7 
+            // TODO gestational start date
+                return Math.floor(differenceInDays(new Date(), this.gestationStartDate)/7)
+            }
+        }
+    },
+    
+    timestamps: true, minimize: false});
 
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User
+

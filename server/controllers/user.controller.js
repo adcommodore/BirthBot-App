@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
-const { sendMessageWithMedia } = require('../twilio/outbound');
+const { createMessage } = require('../domain/create_message');
 
 module.exports = {
 
@@ -14,15 +14,17 @@ module.exports = {
         const newUser = req.body.user;
         client.lookups.v1.phoneNumbers(newUser.phoneNumber)
             .fetch({countryCode: 'US'})
+            // calculate UTCSchedule
             .then(() => {
                 return User.create(newUser)
             })
             .then((newUser) => {
-                sendMessageWithMedia({
-                    userId: newUser._id,
-                    phoneNumber: newUser.phoneNumber,
-                    body: `Hi ${newUser.firstName}, I'm BirthBot. I'm a special kind of chatbot focused on providing you with easily accessible, evidence-based information on pregnancy, birth, and postpartum. Go ahead and save my contact info so you know its me texting.`,
-                    mediaUrl: ['https://media.giphy.com/media/2A1FfWjPqZdpXYb9Ur/giphy.gif','https://vcard.link/card/DCzP.vcf']
+                createMessage(
+                    newUser.phoneNumber, 
+                    `Hi ${newUser.firstName}, I'm BirthBot. I'm a special kind of chatbot focused on providing you with easily accessible, evidence-based information on pregnancy, birth, and postpartum. Go ahead and save my contact info so you know its me texting.`,
+                    ['https://media.giphy.com/media/2A1FfWjPqZdpXYb9Ur/giphy.gif','https://vcard.link/card/DCzP.vcf']
+                ).catch((err) => {
+                    console.log(err)
                 })
                 return newUser
             })

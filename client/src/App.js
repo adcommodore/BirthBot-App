@@ -32,18 +32,18 @@ function App() {
             <Route element = { <AdminLogin/> } path="/admin/login" />
 
             // protected routes
-            <Route element={<RequireAuth/>}>
+            {/* <Route element={<RequireAuth/>}> */}
               <Route element = { <Chat/> } path="/chat" />
               <Route element = { <ContentManager/> } path="/content" />
               <Route element = { <AdminProfile/> } path="/admin/profile" />
               <Route element = { <Broadcast/> } path="/broadcast" />
               <Route element = { <UserDashboard/> } path="/users" />
-            </Route>
+            {/* </Route> */}
 
           </Route>
   
           <Route element={ < Navigate to ="/" replace /> } path="*" />
-
+          
         </Routes>
       <ToastContainer />
     </>

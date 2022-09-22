@@ -1,67 +1,50 @@
-import {
-  useGetContentQuery,
-    useCreateContentMutation,
-    useUpdateContentMutation
-} from '../content/contentSlice';
 import { useState } from "react";
-import Spinner from '../../components/Spinner';
+import { Container, Table } from "react-bootstrap";
+import { useGetAllContentQuery } from '../content/contentApiSlice';
 
 const ContentList = () => {
-  const [newContent, setNewContent] = useState('')
+    const [ currentContent, setCurrentContent] = useState('')
+    const {
+        data: allContent,
+        isLoading,
+        isSuccess,
+        isError,
+        error
+    } = useGetAllContentQuery()
 
-  const {
-      data: content,
-      isLoading,
-      isSuccess,
-      isError,
-      error
-  } = useGetContentQuery()
-  const [createContent] = useCreateContentMutation()
-  const [updateContent] = useUpdateContentMutation()
+    if (isLoading) return <div>Loading...</div>
 
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      createContent({ index, gestationDay, body })
-      setNewContent('')
-  }
+    const contentSelectionHandler = (content) => {
+        setCurrentContent(content)
+    }
 
-  const newItemSection =
-      <form onSubmit={handleSubmit}>
-          <label htmlFor="new-content">Enter new content</label>
-          <div>
-              <input
-                  type="text"
-                  id="new-content"
-                  value={newContent}
-                  onChange={(e) => setNewContent(e.target.value)}
-                  placeholder="Enter new childbirth education content."
-              />
-          </div>
-          <button className="submit">
-              Add
-          </button>
-      </form>
-
-
-  let page;
-  if (isLoading) {
-      page = <Spinner/>
-  } else if (isSuccess) {
-      page = content.map(content => {
-          return (
-              <div>contentItems</div>
-          )
-      })
-  } else if (isError) {
-      page = <p>{error}</p>
-  }
-
-  return (
-      <main>
-          <h1>Todo List</h1>
-          {newItemSection}
-      </main>
-  )
+    return (
+        <Container>
+        <h2>SMS Content Schedule</h2>
+        {allContent 
+            ? allContent.map((content) => (
+                <Table key={content.id} onClick={contentSelectionHandler(content)}>
+                    <thead>
+                        <tr>
+                        <th>Index</th>
+                        <th>Gestational Day</th>
+                        <th>SMS Body</th>
+                        <th>Media Url</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{content.index}</td>
+                            <td>{content.gestationalDay}</td>
+                            <td>{content.body}</td>
+                            <td>{content.mediaUrl}</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            ))
+            : 'No content has been created yet.'}
+    </Container>
+    )
 }
-export default TodoList
+export default ContentList
 

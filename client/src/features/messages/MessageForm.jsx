@@ -1,33 +1,50 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useSendMessageMutation } from "./msgSlice";
-import { Col, Form, Row } from "react-bootstrap";
+import { Container, Form, Row, Col, Button, Alert } from "react-bootstrap";
+import { useSendMessageMutation } from "./msgApiSlice";
 import "./MessageForm.css";
 
-const MessageForm = () => {
-    const [sendNewMessage, { isLoading }] = useSendMessageMutation()
+function MessageForm(props) {
+    const initialMessageState = {
+        _id: '',
+        userId: '',
+        contentId: '',
+        sentTo: '',
+        body: '',
+        mediaUrl: '',
+        date: '',
+    };
 
-    const [body, setBody] = useState('')
-    const [userId, setUserId] = useState('')
+    const [ message, setMessage ] = useState(initialMessageState);
+    const [ error, setError ] = useState('');
+    const [ sendMessage ] = useSendMessageMutation();
 
-    const canSend = [body, userId].every(Boolean) && !isLoading;
-
-    const onSendMessageHandler = async () => {
-        if (canSend) {
-            try {
-                await sendNewMessage({ body, userId }).unwrap()
-
-                setBody('')
-                setUserId('')
-            } catch (err) {
-                console.error('Failed to send message', err)
+    const smsHandler = (e) => {
+        e.preventDefault();
+        const {
+            userId,
+            sentTo,
+            body,
+            date
+        } = message;
+        sendMessage({
+            userId,
+            sentTo,
+            body,
+            date
+        }).then(({data, error}) => {
+            if(!error) {
+                console.log(data)
+            } else {
+                setError(error.error)
             }
-        }
+        }).catch((err) => {
+            console.log(err)
+        })
     }
 
     return (
-        <div>
-            <Form>
+        <Container>
+            <Form onSubmit={smsHandler}>
                 <Row>
                     <Col md={10}>
                         <Form.Group>
@@ -35,15 +52,22 @@ const MessageForm = () => {
                                 type="text" 
                                 placeholder='Write A Message'
                                 name='body'
-                                value={ body }
-                                onChange={ (e) => setBody(e.target.value) }
-                            >
-                            </Form.Control>
+                                value={message.body}
+                                onChange={(e) => setMessage({...message, body: e.target.value})}
+                            />
                         </Form.Group>
                     </Col>
+                    <Col md={2}>
+                        <Button type='submit'>Send</Button>
+                    </Col>
                 </Row>
+                { (error !== "") &&
+                <Alert>
+                    <p>{error}</p>
+                </Alert>
+                }
             </Form>
-        </div>
+        </Container>
     )
 }
 export default MessageForm

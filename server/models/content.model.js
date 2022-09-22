@@ -2,18 +2,18 @@ const mongoose = require('mongoose');
 
 const ContentSchema = new mongoose.Schema({
 
-    index: {
+    deliveryIndex: {
         type: Number,
         required: true,
         min: 0,
         max: 6,
     },
 
-    gestationalDay: {
+    gestationWeek: {
         type: Number,
         required: true,
-        min: 1,
-        max: 300,
+        min: 4,
+        max: 42,
     },
 
     body: { 
@@ -21,11 +21,6 @@ const ContentSchema = new mongoose.Schema({
         required: true,
         minlength: 5,
         maxlength: 1600,
-    },
-
-    mediaAdded: {
-        type: Boolean,
-        default: false
     },
 
     mediaURL: {

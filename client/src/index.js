@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 // import { extendedApiSlice } from './features/messages/msgSlice';
 // import { userApiSlice } from './features/users/userSlice';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // store.dispatch(extendedApiSlice.endpoints.getMesssages.initiate());
 // store.dispatch(userApiSlice.endpoints.getUsers.initiate());
@@ -17,12 +18,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 ReactDOM.createRoot(document.getElementById('root'))
   .render(
     <React.StrictMode>
-      <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/*' element={ <App/> } />
-          </Routes>
-        </BrowserRouter>
-      </Provider>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/*' element={ <App/> } />
+            </Routes>
+          </BrowserRouter>
+        </Provider>
+      </ErrorBoundary>
     </React.StrictMode>
 );

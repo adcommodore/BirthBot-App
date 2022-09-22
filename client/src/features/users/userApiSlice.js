@@ -1,18 +1,11 @@
 import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
 import { apiSlice } from '../../app/api/apiSlice';
 
-const usersAdapter = createEntityAdapter()
-
-const initialState = usersAdapter.getInitialState()
-
 export const userApiSlice = apiSlice.injectEndpoints({
-    endpoints: builder => ({
+    endpoints: (builder) => ({
 
         getUsers: builder.query({
             query: () => '/user',
-            transformResponse: responseData => {
-                return usersAdapter.setAll(initialState, responseData)
-            },
             providesTags: (result) => result ?
             [
                 ...result.map(({ id }) => ({ type: 'User', id })),
@@ -54,17 +47,3 @@ export const {
     useUpdateUserMutation,
 } = userApiSlice
 
-// returns the query result object
-export const selectUsersResult = userApiSlice.endpoints.getUsers.select()
-
-// creates memoized selector
-const selectUsersData = createSelector(
-    selectUsersResult,
-    usersResult => usersResult.data // normalize state object with ids & entities
-)
-
-export const {
-    selectAll: selectAllUsers,
-    selectById: selectUserById,
-    selectIds: selectUserIds
-} = usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState)

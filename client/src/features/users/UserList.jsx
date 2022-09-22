@@ -1,23 +1,36 @@
-import { useSelector } from 'react-redux'
-import { selectAllUsers } from './userApiSlice'
-import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import { Container, ListGroup } from 'react-bootstrap';
+import { useGetUsersQuery } from './userApiSlice';
 
-const UsersList = () => {
-    const users = useSelector(selectAllUsers)
+const UserList = (props) => {
+    const [ currentUser, setCurrentUser ] = useState(null);
+    const {
+        data: users,
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+    } = useGetUsersQuery()
 
-    const renderedUsers = users.map(user => (
-        <li key={user.id}>
-            <Link to={`/user/${user.id}`}>{user.name}</Link>
-        </li>
-    ))
+    if (isLoading) return <div>Loading...</div>
 
+    const userSelectionHandler = (user) => {
+        setCurrentUser(user)
+    }
+    
     return (
-        <section>
-            <h2>Users</h2>
-
-            <ul>{renderedUsers}</ul>
-        </section>
+        <Container>
+            <h2>Current Subscribers</h2>
+            {users 
+                ? users.map((user) => (
+                    <ListGroup.Item key={user.id} onClick={userSelectionHandler(user)}>
+                        <h4>{user.firstName} {user.lastName}</h4>
+                        <h6>{user.phoneNumber}</h6>
+                    </ListGroup.Item>
+                ))
+                : 'No current users.'}
+        </Container>
     )
 }
 
-export default UsersList
+export default UserList

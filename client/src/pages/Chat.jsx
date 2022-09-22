@@ -1,38 +1,36 @@
+import { useState } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { selectCurrentAdmin } from '../features/auth/authSlice';
-import { Row, Col, Container } from 'react-bootstrap';
 import AdminNavBar from '../components/AdminNavBar';
-import UsersList from '../features/users/UserList';
-import MessageUser from '../features/messages/MessageUser';
-import MessageList from '../features/messages/MessageList';
+import UserList from '../features/users/UserList';
 import MessageForm from '../features/messages/MessageForm';
+import MessageList from '../features/messages/MessageList';
 
-function Chat() {
-  const admin = useSelector(selectCurrentAdmin)
-  const welcome = admin ? `Welcome ${admin.firstName}` : 'Welcome!'
-
-  const content = (
-    <div>
+const Chat = (props) => {
+  const [ currentUser, setCurrentUser ] = useState(null);
+  const selectUser = (user) => {
+    setCurrentUser(user)
+  }
+  return (
+    <>
       <AdminNavBar />
-      <section>
-        <h1>{welcome}</h1>
-      </section>
-      <Container style={{ marginTop: '1rem'}}>
-        <MessageUser />
+      <Container>
         <Row>
           <Col md={8}>
-            <MessageList />
-            <MessageForm />
+            <Row style={{height: '600px', border: '1px solid light grey', borderRadius: '10px', margin: '12px 0'}}>
+              <MessageList user={props.currentUser}/>
+            </Row>
+            <Row>
+              <MessageForm user={props.currentUser}/>
+            </Row>
           </Col>
           <Col md={4}>
-            <UsersList />
+            <UserList selectUser={selectUser}/>
           </Col>
-        </Row>  
+        </Row>
       </Container>
-    </div>
+    </>
   )
-  
-  return content
 }
 
 export default Chat

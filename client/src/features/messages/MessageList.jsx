@@ -1,42 +1,29 @@
-import { useSelector } from "react-redux";
-import { selectUserById } from "../users/userApiSlice";
-import { useParams } from 'react-router-dom';
-import { useGetMessagesByUserIdQuery } from "./msgSlice";
-import Spinner from '../../components/Spinner';
+import { Container, ListGroup } from 'react-bootstrap';
+import { useGetMessagesByUserIdQuery } from './msgApiSlice';
 import TimeAgo from './TimeAgo';
 
-function MessageList() {
-    const { userId } = useParams()
-    const user = useSelector( state => selectUserById(state, Number(userId)))
-
+function MessageList(props) {
     const {
-        data: messagesForUser,
+        data: messages,
         isLoading,
         isSuccess,
         isError,
         error
-    } = useGetMessagesByUserIdQuery(userId);
+    } = useGetMessagesByUserIdQuery();
 
-    let content;
-    if(isLoading) {
-        content = <Spinner/>
-    } else if(isSuccess) {
-        const { ids, entities } = messagesForUser
-        content = ids.map(id => (
-            <div>
-                <p>
-                    {entities[id].body}
-                </p>
-                <TimeAgo timestamp={entities.date}/>
-            </div>
-        ))
-    } else if(isError) {
-        content = <p>{error}</p>
-    }
+    if (isLoading) return <div>Loading...</div>
+
     return (
-        <section>
-            {content}
-        </section>
+        <Container>
+            <h2>Current Subscribers</h2>
+            {messages 
+                ? messages.map((message) => (
+                    <ListGroup.Item key={message.id}>
+                        <h5>{message.body}</h5>
+                    </ListGroup.Item>
+                ))
+                : 'No current messages with this user.'}
+        </Container>
     )
 }
 

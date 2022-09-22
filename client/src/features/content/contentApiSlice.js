@@ -1,14 +1,20 @@
-import { createSelector, createEntityAdapter } from '@reduxjs/toolkit';
 import { apiSlice } from '../../app/api/apiSlice';
 
-export const extendedApiSlice = apiSlice.injectEndpoints({
+export const contentApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
 
-        getContent: builder.query({
+        getAllContent: builder.query({
             query: () => ({
                 url: '/content',
                 method: 'GET',
-                body: content
+            }),
+            provideTags: ['Content']
+        }),
+
+        getOneContent: builder.query({
+            query: (id) => ({
+                url: `/content/${id}`,
+                method: 'GET',
             }),
             provideTags: ['Content']
         }),
@@ -17,7 +23,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
             query: (content) => ({
                 url: '/content',
                 method: 'POST',
-                body: content
+                body: { content }
             }),
             invalidatesTags: ['Content']
         }),
@@ -25,7 +31,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
             query: (content) => ({
                 url: `/content/${content.id}`,
                 method: 'PUT',
-                body: content
+                body: { content }
             }),
             invalidatesTags: ['Content']
         }),
@@ -33,7 +39,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetContentQuery,
+    useGetAllContentQuery,
+    useGetOneContentQuery,
     useCreateContentMutation,
     useUpdateContentMutation
 } = contentApiSlice

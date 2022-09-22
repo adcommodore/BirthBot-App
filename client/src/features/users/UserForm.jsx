@@ -9,7 +9,6 @@ import { setCurrentUser } from "./userSlice";
 
 
 const UserForm = () => {
-    
     const initialUserState = {
         _id: '',
         firstName: '',
@@ -22,7 +21,7 @@ const UserForm = () => {
     };
 
     const [ user, setUser ] = useState(initialUserState);
-    const [ error, setError ] = useState('')
+    const [ error, setError ] = useState('');
     const navigate = useNavigate();
     const [createUser] = useCreateUserMutation();
     const dispatch = useDispatch();
@@ -38,30 +37,27 @@ const UserForm = () => {
             timeZone,
             dailySchedule
         } = user;
-            createUser({
-                firstName,
-                lastName,
-                estimatedDueDate,
-                phoneNumber,
-                weeklySchedule,
-                timeZone,
-                dailySchedule
-            })
-                .then(({data, error}) => {
-                    console.log({data, error})
-                    if (!error) {
-                        console.log(data)
-                        dispatch(setCurrentUser(data))
-                        navigate('/checkyourphone/')
-                    }
-                    else {
-                        setError(error.data.message)
-                    }
-                })
-                .catch(e => {
-                    console.log(e)
-                });
-        }
+        createUser({
+            firstName,
+            lastName,
+            estimatedDueDate,
+            phoneNumber,
+            weeklySchedule,
+            timeZone,
+            dailySchedule
+        }).then(({data, error}) => {
+            console.log({data, error})
+            if (!error) {
+                console.log(data)
+                dispatch(setCurrentUser(data))
+                navigate('/checkyourphone/')
+            } else {
+                setError(error.data.message)
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
 
     const formValid = () => {
 
@@ -139,7 +135,7 @@ const UserForm = () => {
                             style={{}}
                             defaultCountry="US"
                             value={user.phoneNumber}
-                            onChange={(e) => setUser({...user, phoneNumber: e.target.value })}
+                            onChange={(phoneNumber) => setUser({...user, phoneNumber: phoneNumber })}
                             required
                         />
                         <Form.Text>Your phone number is kept confidential and will not be shared.</Form.Text>  

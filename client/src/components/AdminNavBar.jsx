@@ -12,12 +12,12 @@ function AdminNavBar() {
     }
 
     return (
-        <Container>
+        
             <Navbar expand="lg" className='adminNavBar'>
                 <Container >
-                        <Navbar.Brand href="/admin">
-                            <img src={logo} style={{width: "5rem", height: "5rem"}} alt="BirthX Logo"/>
-                        </Navbar.Brand>
+                    <Navbar.Brand href="/admin">
+                        <img src={logo} style={{width: "5rem", height: "5rem"}} alt="BirthX Logo"/>
+                    </Navbar.Brand>
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
                         {admin ? (
@@ -44,10 +44,10 @@ function AdminNavBar() {
                             </LinkContainer>
                         </NavDropdown>
                     </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        </Container>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+
     )
 }
 

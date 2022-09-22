@@ -1,23 +1,20 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectCurrentAdmin } from '../features/auth/authSlice';
+import { Container, Row, Col } from 'react-bootstrap'
 import AdminNavBar from '../components/AdminNavBar';
+import ContentList from '../features/content/ContentList';
 
 function ContentManager() {
-  const navigate = useNavigate()
-  const admin = useSelector(selectCurrentAdmin)
 
-  useEffect(() => {
-    if(!admin) {
-      navigate('/admin/login')
-    }
-  }, [admin, navigate])
   
   return (
     <div>
         <AdminNavBar />
-        ContentManager
+        <Container>
+          <Row>
+            <Col>
+              <ContentList />
+            </Col>
+          </Row>
+        </Container>
     </div>
   )
 }
