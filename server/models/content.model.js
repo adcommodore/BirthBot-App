@@ -23,7 +23,7 @@ const ContentSchema = new mongoose.Schema({
         maxlength: 1600,
     },
 
-    mediaURL: {
+    mediaUrl: {
         type: String,
     }
     

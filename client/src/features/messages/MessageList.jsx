@@ -15,11 +15,11 @@ function MessageList(props) {
 
     return (
         <Container>
-            <h2>Current Subscribers</h2>
             {messages 
                 ? messages.map((message) => (
                     <ListGroup.Item key={message.id}>
                         <h5>{message.body}</h5>
+                        <TimeAgo />
                     </ListGroup.Item>
                 ))
                 : 'No current messages with this user.'}

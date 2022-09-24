@@ -28,8 +28,7 @@ const UserSchema = new mongoose.Schema({
         required: [ true, "A phone number is required to sign up for BirthBot."],
         unique: true, 
         minlength: [ 10, "Please enter a 10 digit phone with no spaces or other characters."],
-        maxlength: [ 12, "Please enter a 10 digit phone with no spaces or other characters."],
-        set: number => '+1' + number.toString()
+        maxlength: [ 12, "Please enter a 10 digit phone with no spaces or other characters."]
     },
 
     weeklySchedule:[{
@@ -104,10 +103,10 @@ const UserSchema = new mongoose.Schema({
         ],
     },
 
-    UTCSchedule: {
-        type: String,
-        required: true,
-    }
+    // UTCSchedule: {
+    //     type: String,
+    //     required: true,
+    // },
 
     subscribed: {
         type: Boolean,
@@ -116,16 +115,16 @@ const UserSchema = new mongoose.Schema({
     
 },
 {
-    virtuals: {
-        gestationWeek: {
-            type: Number,
-            get () {
-            // current date - gestation start date = number of days / 7 
-            // TODO gestational start date
-                return Math.floor(differenceInDays(new Date(), this.gestationStartDate)/7)
-            }
-        }
-    },
+    // virtuals: {
+    //     gestationWeek: {
+    //         type: Number,
+    //         get () {
+    //         // current date - gestation start date = number of days / 7 
+    //         // TODO gestational start date
+    //             return Math.floor(differenceInDays(new Date(), this.gestationStartDate)/7)
+    //         }
+    //     }
+    // },
     
     timestamps: true, minimize: false});
 

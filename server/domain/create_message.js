@@ -14,6 +14,9 @@ const createMessage = async (phoneNumber, body, mediaUrl = null, content = null)
         if (mediaUrl !== null) {
             sms.mediaUrl = mediaUrl
         }
+        if (content !== null) {
+            sms.content = content
+        }
         if(!phoneNumber || !body) {
             return Promise.reject('Phone number or message body is missing.')
         } else {

@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../features/users/userSlice';
 import LandingPageNavBar from '../components/LandingPageNavBar';
 import TextAnimation from '../components/TextAnimation';
-import cardBackground from '../assets/img/formbackground.png';
 
 function CheckYourPhone() {
     const user = useSelector(selectCurrentUser);
@@ -14,7 +13,7 @@ function CheckYourPhone() {
             <Row className="justify-content-md-center" style={{margin: '4rem'}}>
                 <Col xs={6}>
                     <Card  className="text-center" style={{borderColor: '#DBD0DD', backgroundColor:'#DBD0DD', boxShadow:'rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px'}}>
-                        <Card.Img src={cardBackground} alt="Muslim women looking at cell phone." style={{opacity: '60%'}} />
+                        <Card.Img style={{opacity: '60%'}} />
                         <Card.ImgOverlay>
                         <Card.Body>
                             <Card.Title style={{marginTop: '1rem', marginBottom: '12rem'}}>

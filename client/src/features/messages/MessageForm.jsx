@@ -1,22 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Form, Row, Col, Button, Alert } from "react-bootstrap";
 import { useSendMessageMutation } from "./msgApiSlice";
 import "./MessageForm.css";
 
-function MessageForm(props) {
+function MessageForm({ user }) {
     const initialMessageState = {
         _id: '',
         userId: '',
-        contentId: '',
         sentTo: '',
         body: '',
         mediaUrl: '',
         date: '',
     };
 
+
     const [ message, setMessage ] = useState(initialMessageState);
     const [ error, setError ] = useState('');
     const [ sendMessage ] = useSendMessageMutation();
+    
+    // useEffect(() => {
+    //     setMessage({...message, userId: user._id, sentTo: user.phoneNumber})
+    // }, [user])
 
     const smsHandler = (e) => {
         e.preventDefault();

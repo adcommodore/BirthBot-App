@@ -1,29 +1,34 @@
 import React from 'react';
 import AdminNavBar from '../components/AdminNavBar';
-import { Row, Col, Button } from "react-bootstrap";
-import { LinkContainer } from 'react-router-bootstrap';
-import './AdminHome.css';
+import { Row, Col, Card, Tabs, Tab} from "react-bootstrap";
+import Login from '../features/auth/Login';
+import Register from '../features/auth/Register';
 
-function Login() {
+
+function AdminHome() {
     return (
-    <div>
+    <>
         <AdminNavBar />
-        <Row>
-            <Col md={6} className="admin_bg"></Col>
-            <Col md={6} className="d-flex flex-direction-column align-items-center justify-content-center" style={{backgroundColor: '#F5F5F5'}}>
-                <div>
-                    <h1>Together, we can facilitate change in the birth culture of the United States.</h1>
-                    <p>We believe every birthing person should feel centered and supported during their pregnancy, birth, and postpartum experiences.</p>
-                    <LinkContainer to="/admin/register">
-                        <Button varriant="success">
-                            Get Started <i className="fas fa-comments admin-message-icon"></i>
-                        </Button>
-                    </LinkContainer>
-                </div>
+        <Row className="admin_bg">
+            <Col md={6} ></Col>
+            <Col md={6} className="d-flex flex-direction-column align-items-center justify-content-center">
+                <Card style={{borderRadius: '10px', border: 'solid 1px grey'}}>
+                    <Card.Header style={{textAlign: 'center', padding: '20px 40px 10px 40px'}}>
+                        <h1 style={{fontSize: '30px'}}>Together, we can change <br/>maternity care for the better.</h1>
+                    </Card.Header>
+                    <Tabs fill>
+                        <Tab eventKey='login' title="Login"> 
+                            <Login />
+                        </Tab>
+                        <Tab eventKey='register' title="Register">
+                            <Register />
+                        </Tab>
+                    </Tabs>
+                </Card>
             </Col>
         </Row>
-    </div>
+    </ >
     )
 }
 
-export default Login
+export default AdminHome
