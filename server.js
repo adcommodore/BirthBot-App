@@ -13,7 +13,7 @@ const errorHandler = require('./middleware/errorHandler');
 const PORT = process.env.PORT || 5002;
 
 app.use(logger);
-app.use(helmet({noSniff: false, contentSecurityPolicy: {directives: {'img-src': ["'self'", 'purecatamphetamine.github.io']}}}));
+app.use(helmet({noSniff: false, contentSecurityPolicy: {directives: {'img-src': ["'self'", 'purecatamphetamine.github.io', 'www.w3.org']}}}));
 app.use(morgan('tiny'));
 app.use(credentials);
 app.use(cors(corsOptions));
