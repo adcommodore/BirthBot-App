@@ -13,7 +13,7 @@ const errorHandler = require('./middleware/errorHandler');
 const PORT = process.env.PORT || 5002;
 
 app.use(logger);
-app.use(helmet());
+app.use(helmet({noSniff: false}));
 app.use(morgan('tiny'));
 app.use(credentials);
 app.use(cors(corsOptions));
@@ -36,7 +36,7 @@ app.use('/sms', require('./routes/message.routes'));
 
 if (process.env.NODE_ENV === 'production') {
     app.get('*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html', ));
     })
 }
 
