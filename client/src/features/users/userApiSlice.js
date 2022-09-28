@@ -18,7 +18,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query: user => ({
                 url: '/user',
                 method: 'POST',
-                body: user
+                body: { user }
             }),
             invalidatesTags: ['User']
         }),

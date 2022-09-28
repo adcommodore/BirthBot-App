@@ -29,8 +29,14 @@ app.use('/content', require('./routes/content.routes'));
 app.use('/user',  require('./routes/user.routes'));
 app.use('/sms', require('./routes/message.routes'));
 
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static('client/build'))
+// }
+
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'))
+    app.get('*', function(req, res) {
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+    })
 }
 
 const server = require('http').createServer(app);

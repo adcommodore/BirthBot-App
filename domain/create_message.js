@@ -4,7 +4,7 @@ const config = require('../config/twilio.config');
 const client = require('twilio')(config.accountSid, config.authToken);
 
 const createMessage = async (phoneNumber, body, mediaUrl = null, content = null) => {
-    const user = await User.find({ phoneNumber: phoneNumber })
+    const user = await User.findOne({ phoneNumber: phoneNumber });
     if(!user) {
         return Promise.reject('User is not registered.')
     } else {
@@ -24,7 +24,6 @@ const createMessage = async (phoneNumber, body, mediaUrl = null, content = null)
         } else {
             return client.messages.create(sms)
                 .then((sentMsg) => {
-                    console.log(user)
                     SentSMS.create({
                         userId: user._id,
                         contentId: content?._id,
