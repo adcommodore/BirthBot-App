@@ -1,9 +1,12 @@
 import { Card } from 'react-bootstrap';
 
-function FeatureItem({text}) {
+function FeatureItem({ text, src }) {
     return (
-        <Card className="card w-75 text-left ml-4 p-4 my-4">
-            <Card.Title>{text}</Card.Title>
+        <Card className="card w-100 text-left px-3 my-3 pt-3">
+            <Card.Img src={src} style={{opacity: '0.4'}}/>
+            <Card.Body>
+                <Card.Title>{text}</Card.Title>
+            </Card.Body>
         </Card>
     )
 }
