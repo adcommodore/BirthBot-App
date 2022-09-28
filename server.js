@@ -13,7 +13,7 @@ const errorHandler = require('./middleware/errorHandler');
 const PORT = process.env.PORT || 5002;
 
 app.use(logger);
-app.use(helmet({noSniff: false}));
+app.use(helmet({noSniff: false, contentSecurityPolicy: {directives: {'img-src': ["'self'", 'purecatamphetamine.github.io']}}}));
 app.use(morgan('tiny'));
 app.use(credentials);
 app.use(cors(corsOptions));
@@ -25,10 +25,10 @@ app.use(errorHandler);
 require('./config/mongoose.config');
 require('./config/twilio.config');
 
-app.use('/admin', require('./routes/admin.routes'));
-app.use('/content', require('./routes/content.routes'));
-app.use('/user',  require('./routes/user.routes'));
-app.use('/sms', require('./routes/message.routes'));
+app.use('/api/admin', require('./routes/admin.routes'));
+app.use('/api/content', require('./routes/content.routes'));
+app.use('/api/user',  require('./routes/user.routes'));
+app.use('/api/sms', require('./routes/message.routes'));
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));

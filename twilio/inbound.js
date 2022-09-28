@@ -20,9 +20,9 @@ const makePointer = (req, res, user) => {
 }
 
 const recieveMessage = async (req, res) => {
-    const user = await User.findOne({ phoneNumber: res.phoneNumber })
+    const user = await User.findOne({ phoneNumber: res.body.phoneNumber })
 
-    let pointer = await Pointer.findOne({ phone: res.phoneNumber || user.phoneNumber })
+    let pointer = await Pointer.findOne({ phone: res.body.phoneNumber || user.phoneNumber })
     if (!pointer) {
         pointer = makePointer(req, res, user)
     } else {
