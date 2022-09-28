@@ -6,9 +6,9 @@
   "scripts": {
     "client": "cd client && npm start",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run install-client && npm run build",
     "install-client": "cd client && npm install",
-    "start": "concurrently -n 'server, client' -c 'red, green' \"node server.js\" \"npm run client\"",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node server.js",
     "dev": "concurrently -n 'server, client' -c 'red, green' \"nodemon server.js\" \"npm run client\""
   },
   "author": "Alexis Diaz Commodore",
