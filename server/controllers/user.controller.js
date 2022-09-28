@@ -14,11 +14,11 @@ module.exports = {
         const newUser = req.body.user;
         client.lookups.v1.phoneNumbers(newUser.phoneNumber)
             .fetch({countryCode: 'US'})
-            // calculate UTCSchedule
             .then(() => {
                 return User.create(newUser)
             })
             .then((newUser) => {
+                
                 createMessage(
                     newUser.phoneNumber, 
                     `Hi ${newUser.firstName}, I'm BirthBot. I'm a special kind of chatbot focused on providing you with easily accessible, evidence-based information on pregnancy, birth, and postpartum. Go ahead and save my contact info so you know its me texting.`,
@@ -33,7 +33,6 @@ module.exports = {
                 res.status(201).json(newUser);
             })
             .catch((err) => {
-                console.log("we got here")
                 let msg = '';
                 if (err.code == 11000) {
                     msg = "Phone number already registered."

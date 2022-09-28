@@ -1,16 +1,17 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import logo from '../assets/img/logo.png';
 
-function LandingPageNavBar() {
+function UserNavBar() {
 
     return (
-        <Container style={{padding: "1rem 0rem", }}>
-            <Navbar expand="lg" className='userNavBar'>
-                <Container>
+        <Container style={{paddingTop: '20px' }}>
+            <Navbar expand='lg' className='userNavBar'>
+                <Container style={{padding: '0 30px'}}>
                     <Navbar.Brand href="/">
                         <img src={logo} style={{width: "5rem", height: "5rem"}} alt="BirthX Logo"/>
                     </Navbar.Brand>
-                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ms-auto">
                             <Nav.Link href="/signup">
                                 Sign Up
@@ -32,4 +33,4 @@ function LandingPageNavBar() {
     )
 }
 
-export default LandingPageNavBar
+export default UserNavBar

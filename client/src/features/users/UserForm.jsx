@@ -7,14 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./userSlice";
 
-
 const UserForm = () => {
     const initialUserState = {
         _id: '',
         firstName: '',
         lastName: '',
-        estimatedDueDate: '',
         phoneNumber: '',
+        estimatedConceptionDate: '',
+        averageLengthOfMenstrualCycle: 28,
         weeklySchedule: [],
         timeZone: '',
         dailySchedule: '',
@@ -31,8 +31,9 @@ const UserForm = () => {
         const {
             firstName,
             lastName,
-            estimatedDueDate,
             phoneNumber,
+            estimatedConceptionDate,
+            averageLengthOfMenstrualCycle,
             weeklySchedule,
             timeZone,
             dailySchedule
@@ -40,8 +41,9 @@ const UserForm = () => {
         createUser({
             firstName,
             lastName,
-            estimatedDueDate,
             phoneNumber,
+            estimatedConceptionDate,
+            averageLengthOfMenstrualCycle,
             weeklySchedule,
             timeZone,
             dailySchedule
@@ -115,21 +117,6 @@ const UserForm = () => {
             <Row className="justify-content-lg-center">
                 <Col lg='9'>
                     <Form.Group className="mb-3">
-                        <Form.Label>Please enter the first day of your last period:</Form.Label>
-                        <Form.Control
-                            type='date'
-                            name='estimatedDueDate'
-                            value={user.estimatedDueDate}
-                            onChange={(e) => setUser({...user, estimatedDueDate: e.target.value })}
-                            required
-                        />
-                    </Form.Group>
-                </Col>
-            </Row>
-
-            <Row className="justify-content-lg-center">
-                <Col lg='9'>
-                    <Form.Group className="mb-3">
                         <Form.Label>Please enter your phone number:</Form.Label>
                         <PhoneInput
                             style={{}}
@@ -142,6 +129,61 @@ const UserForm = () => {
                     </Form.Group>
                 </Col>
             </Row>
+
+            <Row className="justify-content-lg-center">
+                <Col lg='9'>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Please enter the first day of your last period:</Form.Label>
+                        <Form.Control
+                            type='date'
+                            name='estimatedDueDate'
+                            value={user.estimatedConceptionDate}
+                            onChange={(e) => setUser({...user, estimatedConceptionDate: e.target.value })}
+                            required
+                        />
+                    </Form.Group>
+                </Col>
+            </Row>
+
+            <Row className="justify-content-lg-center">
+                <Col lg='9'>
+                    <Form.Group className="mb-3">
+                        <Form.Label>What is the average length of your menstrual cycle?</Form.Label>
+                        <Form.Select
+                            value={user.averageLengthOfMenstrualCycle} 
+                            onChange={(e) => setUser({...user, averageLengthOfMenstrualCycle: e.target.value})}
+                            >
+                            <option value={20}>20 days</option>
+                            <option value={21}>21 days</option>
+                            <option value={22}>22 days</option>
+                            <option value={23}>23 days</option>
+                            <option value={24}>24 days</option>
+                            <option value={25}>25 days</option>
+                            <option value={26}>26 days</option>
+                            <option value={27}>27 days</option>
+                            <option value={28} selected>28 days</option>
+                            <option value={29}>29 days</option>
+                            <option value={30}>30 days</option>
+                            <option value={31}>31 days</option>
+                            <option value={32}>32 days</option>
+                            <option value={33}>33 days</option>
+                            <option value={34}>34 days</option>
+                            <option value={35}>35 days</option>
+                            <option value={36}>36 days</option>
+                            <option value={37}>37 days</option>
+                            <option value={38}>38 days</option>
+                            <option value={39}>39 days</option>
+                            <option value={40}>40 days</option>
+                            <option value={41}>41 days</option>
+                            <option value={42}>42 days</option>
+                            <option value={43}>43 days</option>
+                            <option value={44}>44 days</option>
+                            <option value={45}>45 days</option>
+                        </Form.Select>
+                    </Form.Group>
+                </Col>
+            </Row>
+
 
             <h4>Select Your Schedule</h4>
             <hr/>
@@ -224,7 +266,7 @@ const UserForm = () => {
                 <Col lg='9'>
                     <Form.Group className="mb-3">
                         <Form.Label>What time of the day would you like to receive text message updates from BirthBot?</Form.Label>
-                        <Form.Select>
+                        <Form.Select value={user.dailySchedule} onChange={(e) => setUser({...user, dailySchedule: e.target.value})}>
                             <option value="" defaultValue>Select Time</option>
                             <option value="6:00 AM" name="6:00 AM">6:00 AM</option>
                             <option value="6:30 AM" name="6:30 AM">6:30 AM</option>
@@ -276,7 +318,7 @@ const UserForm = () => {
             </Row>
 
         </Form>
-   
+
     )
 }
 

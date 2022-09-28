@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const differenceInDays = require('date-fns/differenceInDays')
+const addDays = require('date-fns/addDays');
+const differenceInWeeks = require('date-fns/differenceInWeeks');
+const zonedTimeToUtc = require("date-fns-tz");
 
 const UserSchema = new mongoose.Schema({
 
@@ -17,10 +19,47 @@ const UserSchema = new mongoose.Schema({
         maxlength: [ 20, "Please shorten your last name to under 20 characters."]
     },
 
+    isPartner: {
+        type: Boolean,
+        default: false
+    },
+
+    estimatedConceptionDate: {
+        type: Date,
+        required: [ true, "The date of your last menstrual period is required to calculate your estimated due date."],
+        max: Date.now
+    },
+
+    averageLengthOfMenstrualCycle: {
+        type: Number,
+        required: [ true, "The average length of your menstrual cycle is required to calculate your estimated due date."],
+        min: 20,
+        max: 45,
+        default: 28,
+    },
+
     estimatedDueDate: {
         type: Date,
-        required: [ true, "Your last menstrual period is required to calculate your estimated due date."],
-        max: Date.now
+        get: ()  => {
+            if (this.averageLengthOfMenstrualCycle == 28) {
+                return addDays(this.estimatedConceptionDate, 280)
+            } else if (this.averageLengthOfMenstrualCycle < 28) {
+                let cycleDifference = 28 - this.averageLengthOfMenstrualCycle
+                let daysUntilDueDate = 280 - cycleDifference
+                return addDays(this.estimatedConceptionDate, daysUntilDueDate)
+            } else if (this.averageLengthOfMenstrualCycle > 28) {
+                let cycleDifference = this.averageLengthOfMenstrualCycle - 28
+                let daysUntilDueDate = 280 - cycleDifference
+                return addDays(this.estimatedConceptionDate, daysUntilDueDate)
+            }
+        }
+    },
+
+    gestationalWeek: {
+        type: String,
+        get: () => {
+            return differenceInWeeks(date.Now(), estimatedConceptionDate)
+        }
     },
 
     phoneNumber: {
@@ -103,30 +142,19 @@ const UserSchema = new mongoose.Schema({
         ],
     },
 
-    // UTCSchedule: {
-    //     type: String,
-    //     required: true,
-    // },
+    UTCSchedule: {
+        type: Date,
+        get: () => {
+            return zonedTimeToUtc(this.dailySchedule, this.timeZone)
+        }
+    },
 
     subscribed: {
         type: Boolean,
         default: true,
     },
     
-},
-{
-    // virtuals: {
-    //     gestationWeek: {
-    //         type: Number,
-    //         get () {
-    //         // current date - gestation start date = number of days / 7 
-    //         // TODO gestational start date
-    //             return Math.floor(differenceInDays(new Date(), this.gestationStartDate)/7)
-    //         }
-    //     }
-    // },
-    
-    timestamps: true, minimize: false});
+}, {timestamps: true, minimize: false});
 
 const User = mongoose.model('User', UserSchema);
 

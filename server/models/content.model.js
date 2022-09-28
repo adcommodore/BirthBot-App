@@ -9,11 +9,17 @@ const ContentSchema = new mongoose.Schema({
         max: 6,
     },
 
-    gestationWeek: {
+    gestationalWeek: {
         type: Number,
         required: true,
         min: 4,
-        max: 42,
+        max: 54,
+    },
+
+    hasGivenBirth: {
+        type: Boolean,
+        required: true,
+        default: false,
     },
 
     body: { 
