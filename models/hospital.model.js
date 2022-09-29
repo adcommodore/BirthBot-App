@@ -9,7 +9,7 @@ const HospitalSchema = new mongoose.Schema({
         maxlength: 100
     },
 
-    address: {
+    streetAddress: {
         type: String,
         required: true,
         minlength: 5,
@@ -34,14 +34,20 @@ const HospitalSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 5,
-        maxlength: 5
+        maxlength: 9
     },
 
-    cSection: Number,
+    cSection: {
+        type: String
+    },
 
-    electiveInduction: Number,
+    episiotomy: {
+        type: String
+    },
 
-    episiotomy: Number,
+    electiveDelivery: {
+        type: String
+    },
 
 }, {timestamps: true, minimize: false});
 

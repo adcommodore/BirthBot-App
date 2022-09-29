@@ -116,18 +116,7 @@ img {
   background-color: #DBD0DD !important;
 }
 
-/************ User NavBar ************/
-.landing-page-video {
-  object-fit: fill;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  overflow-x: hidden;
-  position: fixed;
-  top: 0; right: 0; bottom: 0; left: 0;
-  overflow: hidden;
-}
-
+/************ Landing Page ************/
 .userNavBar {
   background-color: #DBD0DD !important;
   border-radius: 10px;
@@ -137,9 +126,26 @@ img {
   box-shadow: 5px 10px 30px #7C6682;
 }
 
-Nav.Link:hover {
-  text-shadow: #ffffff;
+#card-item:hover {
+  box-shadow: 5px 10px 30px #EDDED7;
 }
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  left: 10%;
+  height: 0;
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 10%;
+  height: 80%;
+  width: 80%;
+  position: absolute;
+}
+
 
 /************ AdminLogin ************/
 .admin_bg {

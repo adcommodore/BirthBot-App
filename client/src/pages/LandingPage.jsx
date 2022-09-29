@@ -1,35 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Preloader from '../components/Preloader';
 import UserNavBar from '../components/UserNavBar';
 import MobileMockup from '../components/MobileMockup';
 import Features from '../components/Features';
+import Video from '../components/Video';
+import Footer from '../components/Footer';
 
 function LandingPage () {
-    const [ loading, setLoading ] = useState(false);
-
-    // useEffect(() => {
-    //     setLoading(true)
-    //     setTimeout(() => {
-    //         setLoading(false)
-    //     }, 19000 )
-    // }, [])
 
     return (
-        <div>
-            {
-                loading ?
-                
-                <Preloader
-                loading={loading}
-                />
-
-                :
-        
             <Container>
                 <UserNavBar/>
                 <Row>
-                    <Container style={{textAlign: 'center', marginTop: '2rem'}}>
+                    <Container style={{textAlign: 'center'}} className="mt-5">
                         <h2 className="display-3">BirthBot</h2>
                     </Container>
                 </Row>
@@ -40,10 +23,15 @@ function LandingPage () {
                 <Row>
                     <Features/>
                 </Row>
+
+                <Row>
+                    <Video/>
+                </Row>
+
+                <Row>
+                    <Footer/>
+                </Row>
             </Container>
-            }
-        </div>
-    
     )
 }
 

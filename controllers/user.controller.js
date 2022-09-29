@@ -21,8 +21,8 @@ module.exports = {
                 
                 createMessage(
                     newUser.phoneNumber, 
-                    `Hi ${newUser.firstName}, I'm BirthBot. I'm a special kind of chatbot focused on providing you with easily accessible, evidence-based information on pregnancy, birth, and postpartum. Go ahead and save my contact info so you know its me texting.`,
-                    ['https://media.giphy.com/media/2A1FfWjPqZdpXYb9Ur/giphy.gif','https://vcard.link/card/DCzP.vcf']
+                    `Hi ${newUser.firstName},\n\nI'm BirthBot. I'm a special kind of chatbot focused on providing you with easily accessible, evidence-based information on pregnancy, birth, and postpartum. Go ahead and save my contact info so you know its me texting.\n\nReply MENU for a list of options.`,
+                    ['https://media.giphy.com/media/2A1FfWjPqZdpXYb9Ur/giphy.gif','https://vcard.link/card/DNHf.vcf']
                 ).catch((err) => {
                     console.log(err)
                 })

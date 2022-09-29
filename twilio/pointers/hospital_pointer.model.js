@@ -23,11 +23,17 @@ const HospitalPointerSchema = new mongoose.Schema({
             required: true,
         },
 
-        selectedState: {String},
+        selectedState: {
+            type: String
+        },
 
-        selectedCity: {String},
+        selectedCity: {
+            type: String
+        },
 
-        nameSearch: {String},
+        nameSearch: {
+            type: String
+        },
 
         hospitals: [String]
 

@@ -4,9 +4,9 @@ import img from '../assets/img/phonemockup.png';
 
 function MobileMockup() {
     return (
-        <Container className='py-5'>
+        <Container>
             <Row>
-                <Col lg={6} md={6} sm={12} className="d-flex align-items-center">
+                <Col lg={6} md={6} sm={12} className="d-flex align-items-center pt-4">
                     <div className='text-lg-start text-md-start text-center'>
                         <h4>
                             The first ever SMS-based childbirth educating chatbot powered by Al.
@@ -20,8 +20,8 @@ function MobileMockup() {
                     </div>
                 </Col>
 
-                <Col lg={6} md={6} sm={12}>
-                    <Image src={img} fluid/>
+                <Col lg={6} md={6} sm={12} className='py-4'>
+                    <Image src={img}/>
                 </Col>
             </Row>
 
