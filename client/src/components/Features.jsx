@@ -17,7 +17,7 @@ function Features() {
                 <Col lg={3} md={3} sm={12} className='g-3 d-flex justify-content-center'>
                     <FeatureItem
                         src={CardThree}
-                        text='Learn about pregnancy, birth, and postpartum gradually throughout your pregnancy.'
+                        text='Learn gradually throughout your pregnancy.'
                     />
                 </Col>
 

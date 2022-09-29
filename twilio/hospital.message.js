@@ -1,10 +1,10 @@
-const HospitalPointer = require('./pointers/hospital_pointer.model');
+const HospitalPointer = require('./pointers/hospital_pointer');
 const Hospital = require('../models/hospital.model');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 //validate states
 const isValidForState = (res) => {
-  res.match(RegExp [
+  res.match([
     /Alabama/i, /AL/i,
     /Alaska/i, /AK/i,
     /Arizona/i, /AZ/i,
@@ -77,7 +77,7 @@ module.exports = {
     if (isValidForState('HOSPITAL.SELECT_STATE', response)) {
       pointer.current = 'HOSPITAL.SELECT_STATE'
       pointer.next = 'HOSPITAL.SELECT_CITY'
-      pointer.selectedState = req.body.Body
+      pointer.selectedState = response
       pointer.save()
       twiml.message('What city is the hospital in?')
     } else {
@@ -92,7 +92,7 @@ module.exports = {
       pointer.next = 'HOSPITAL.SEARCH_BY_NAME'
       pointer.selectedCity = req.body.Body
       pointer.save()
-    twiml.message("What is a part of the hospital's name?")
+    twiml.message("What is part of the hospital's name?")
     res.type('text/xml').send(twiml.toString())
   },
 
