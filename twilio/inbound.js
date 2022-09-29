@@ -5,7 +5,7 @@ const helpMsg = require('./help.message');
 
 const makePointer = (req, res, user) => {
     // Check twilio message
-    if (req.body.Body.match(/.*HOSPITAL.*/i)) {
+    if (req.body.Body.match(/.*STAT.*/i)) {
         return Pointer.create({
         next: 'HOSPITAL.INIT',
         userId: user._id,
@@ -24,11 +24,7 @@ const recieveMessage = async (req, res) => {
     if (!pointer) {
         pointer = await makePointer(req, res, user)
     } 
-    console.log(pointer._id)
     switch (pointer.next) {
-        case 'MESSAGING.COMPLETE':
-          hospitalMsg.complete(req, res)
-          break
         case 'HOSPITAL.INIT':
           hospitalMsg.init(req, res, pointer)
           break

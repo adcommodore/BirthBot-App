@@ -35,7 +35,7 @@ const HospitalPointerSchema = new mongoose.Schema({
             type: String
         },
 
-        hospitals: [String]
+        hospitals: [String],
 
 }, { timestamp: true })
 

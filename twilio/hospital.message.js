@@ -63,12 +63,11 @@ const isValidForState = (res) => {
 module.exports = {
 
   init: (req, res, pointer) => {
-    const { body } = req;
     pointer.current = 'HOSPITAL.INIT'
     pointer.next = 'HOSPITAL.SELECT_STATE'
     pointer.save()
     const twiml = new MessagingResponse()
-    twiml.message('Which state is the hospital in?')
+    twiml.message('What state is the hospital in?')
     res.type('text/xml').send(twiml.toString())
   },
 
@@ -80,7 +79,7 @@ module.exports = {
       pointer.next = 'HOSPITAL.SELECT_CITY'
       pointer.selectedState = req.body.Body
       pointer.save()
-      twiml.message('Which city is the hospital in?')
+      twiml.message('What city is the hospital in?')
     } else {
       twiml.message('Try again.')
     }
@@ -93,19 +92,19 @@ module.exports = {
       pointer.next = 'HOSPITAL.SEARCH_BY_NAME'
       pointer.selectedCity = req.body.Body
       pointer.save()
-    twiml.message('What is a part of the name of the hospital?')
+    twiml.message("What is a part of the hospital's name?")
     res.type('text/xml').send(twiml.toString())
   },
 
-  searchByName: (req, res, pointer) => {
+  searchByName: async (req, res, pointer) => {
     const twiml = new MessagingResponse()
     // message state and city to case-ignore
-    const hospitals = Hospital.find({
-      state: {$regex: '.*pointer.selectedState.*', $options: 'i'},
-      city: {$regex: '.*pointer.selectedCity.*', $options: 'i'},
-      name: {$regex: '.*req.body.Body.*', $options: 'i'},
-    }).limit(10)
-    console.log(pointer)
+    const hospitals = await Hospital.find({
+      state: new RegExp(pointer.selectedState, 'i'),
+      city: new RegExp(pointer.selectedCity, 'i'),
+      name: new RegExp(`.*${req.body.Body}.*`, 'i')
+    }).limit(10).exec()
+    console.log(hospitals)
   
     if (hospitals.length > 0) {
       pointer.current = 'HOSPITAL.SEARCH_BY_NAME'
@@ -118,9 +117,7 @@ module.exports = {
         .map((hospital, i) => `${i + 1}) ${hospital.name}`)
         .join('\n')
   
-      twiml.message(`Here's a list of hospitals we found:
-  ${resultCountMessages}
-  Please respond with the number of your selection:`)
+      twiml.message(`Here's a list of hospitals we found:\n\n${resultCountMessages}\n\nPlease respond with the # of your selection:`)
     } else {
       pointer.current = 'HOSPITAL.SEARCH_BY_NAME'
       pointer.next = 'MESSAGING.COMPLETE'
@@ -131,21 +128,14 @@ module.exports = {
     res.type('text/xml').send(twiml.toString())
   },
   
-  selectHospital: (req, res, pointer) => {
+  selectHospital: async (req, res, pointer) => {
     const userSelection = parseInt(req.body.Body)
     const hospitalId = pointer.hospitals[userSelection - 1]
-    const hospital = Hospital.findOne({ _id: hospitalId })
-    pointer.current = 'HOSPITAL.SELECT_HOSPITAL'
-    pointer.next = 'MESSAGING.COMPLETE'
-    pointer.selectedHospital = hospitalId
-    pointer.save()
+    const hospital = await Hospital.findOne({ _id: hospitalId })
     const twiml = new MessagingResponse()
-    twiml.message(`Here's the stats for ${hospital.name}:\n\n${hospital.stats()}`)
+    twiml.message(`Here are the stats for ${hospital.name}:\n\nC-Section Rate: ${hospital.cSection}\nEpisiotomy Rate: ${hospital.episiotomy}\nElective Delivery Rate: ${hospital.electiveDelivery}`)
     res.type('text/xml').send(twiml.toString())
-  },
-
-  complete: (req, res, pointer) => {
-    HospitalPointer.deleteOne({_id: pointer._id})
+    await HospitalPointer.deleteOne({_id: pointer._id})
   },
 
 }
